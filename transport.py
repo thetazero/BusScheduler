@@ -16,7 +16,8 @@ class Transport:
 
     def get_prediction(self, stop):
         pred = self.api.predictions(stpid=stop, maxpredictions=1)['prd']
-        time = pred['tmstmp']
+        bus_route = pred['rt']
+        time = pred['prdtm']
         year = time[:4]
         month = time[4:6]
         day = time[6:8]
@@ -24,8 +25,9 @@ class Transport:
         minute = time[12:14]
         second = time[15:17]
         meridiem = 'pm' if int(hour) > 11 else 'am'
-        return (f"{month}-{day}-{year} {self.adjust_hour(hour)}:{minute}:{second}" +
-                f"{meridiem}")
+        return {'time': (f"{month}-{day}-{year}"
+                         f" {self.adjust_hour(hour)}:{minute}:{second} {meridiem}"),
+                'bus': (f"{bus_route}")}
     
 
 if __name__ == '__main__':

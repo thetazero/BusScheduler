@@ -7,4 +7,5 @@ bus = Transport()
 
 @app.route('/')
 def index():
-    return render_template('index.html', time=bus.get_prediction(7097))
+    pred = bus.get_prediction(7097) # 7097 is the STOP id
+    return render_template('index.html', time=pred['time'], bus=pred['bus'])
