@@ -1,5 +1,7 @@
 // Set the current time
 
+let counter = 0
+
 function change_text() {
     const now = new Date()
     let tm = document.getElementById("current_time")
@@ -47,7 +49,9 @@ function set_difference_time() {
 
     let total_diff = pred_sec - now_sec
 
-    if (total_diff <= 0) {
+    // Reload page when timer gets to zero and when counter gets to 19
+    if (total_diff <= 0 || counter == 19) {
+        counter = 0
         window.location.reload()
         return
     } 
@@ -65,6 +69,8 @@ function set_difference_time() {
     }
 
     tm.textContent = `You have ${min_diff}:${sec_diff} remaining`
+
+    counter += 1
 }
 
 function reload_webpage() {
