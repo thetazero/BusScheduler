@@ -67,7 +67,12 @@ function set_difference_time() {
     tm.textContent = `You have ${min_diff}:${sec_diff} remaining`
 }
 
+function reload_webpage() {
+    window.location.reload()
+}
+
 window.onload = function() {
     change_text()
     setInterval(set_difference_time, 1000)
+    setInterval(reload_webpage, 20000)
 }
