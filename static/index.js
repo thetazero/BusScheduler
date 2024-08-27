@@ -20,23 +20,22 @@ function change_text() {
         meridiem = 'pm'
     }
 
-    if (hour == 12) {
-        hour = 12
+    if (hour != 12) {
+        hour %= 12
     }
-    hour %= 12
 
     tm.textContent += `${hour}:${minute}:${second} ${meridiem}`
 }
 
 function get_prediction_time() {
-    let tm = document.getElementById("estimated_time").textContent.slice(30)
-    let hour = tm.slice(0, 1)
-    let minute = tm.slice(2, 4)
-    let second = tm.slice(5, 7)
-    if (tm.slice(8, 11) == 'pm' && hour != '12') {
-        hour = (Number(hour) + 12).toString()
+    let hour = Number(document.getElementById("hour").textContent)
+    let minute = Number(document.getElementById("minute").textContent)
+    let second = Number(document.getElementById("second").textContent)
+    let meridiem = document.getElementById("meridiem").textContent
+    if (meridiem == "pm") {
+        hour += 12
     }
-    return {'hour': Number(hour), 'minute': Number(minute), 'second': Number(second)}
+    return {'hour': hour, 'minute': minute, 'second': second}
 }
 
 function set_difference_time() {
@@ -53,6 +52,8 @@ function set_difference_time() {
         return
     } 
 
+    // Bus predictions will never be greater than 30 minutes
+    // so there is no need to calculate hour_diff
     let min_diff = Math.floor(total_diff / 60)
     let sec_diff = total_diff % 60
 

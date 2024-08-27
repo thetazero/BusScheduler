@@ -25,12 +25,16 @@ class Transport:
         minute = time[12:14]
         second = time[15:17]
         meridiem = 'pm' if int(hour) > 11 else 'am'
-        return {'time': (f"{month}-{day}-{year}"
-                         f" {self.adjust_hour(hour)}:{minute}:{second} {meridiem}"),
+        return {'date': (f"{month}-{day}-{year}"),
+                'hour': (f"{self.adjust_hour(hour)}"),
+                'minute': (f"{minute}"),
+                'second': (f"{second}"),
+                'meridiem': (f"{meridiem}"),
                 'bus': (f"{bus_route}")}
     
 
 if __name__ == '__main__':
     # For debugging
     bus = Transport()
+    # 7097 is the stop ID at forbes-wightman
     print(bus.get_prediction(7097))
