@@ -33,7 +33,7 @@ class Temperature:
         self.bus.write_i2c_block_data(self.tmp_address, self.reg_config, self.val)
 
     def read_temp(self):
-        self.val = self.bus.read_i2c_block_data(self.i2c_address, self.reg_temp, 2)
+        self.val = self.bus.read_i2c_block_data(self.tmp_address, self.reg_temp, 2)
 
         temp_c = (self.val[0] << 4) | (self.val[1] >> 4)
         temp_c = twos_comp(temp_c, 12)
