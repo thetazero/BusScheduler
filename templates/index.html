@@ -10,5 +10,13 @@
         <p>Next stop at Forbes - Wightmen is a {{ bus }}</p>
         <h3 id="estimated_time">Estimated arrival: <div id="date">{{ date }}</div> <div id="hour">{{ hour }}</div>:<div id="minute">{{ minute }}</div>:<div id="second">{{ second }}</div> <div id="meridiem">{{ meridiem }}</div></h2>
         <h1 id="difference_time">You have </h1>
+        <h3 id="time">It's {{ temp }}°F right now</h3>
+        {{% if temp > 80 %}}
+            <h3>Gosh it's hot</h3>
+        {{% elif temp > 70 %}}
+            <h3>I'm glad it's a normal temperature</h3>
+        {{% else %}}
+            <h3>Brrrr, it's cold</h3>
+        {{% endif %}}
     </body>
 </html>
