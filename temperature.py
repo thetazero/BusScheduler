@@ -3,7 +3,9 @@
 # https://learn.sparkfun.com/tutorials/python-programming-tutorial-getting-started-with-the-raspberry-pi/experiment-4-i2c-temperature-sensor
 try:
     import smbus
+    tempAvailable = True
 except ImportError:
+    tempAvailable = False
     print("Note temperature can not be displayed on this device.")
 
 def twos_comp(val, bits):
