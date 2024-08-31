@@ -32,7 +32,7 @@ function get_prediction_time() {
     let minute = Number(document.getElementById("minute").textContent)
     let second = Number(document.getElementById("second").textContent)
     let meridiem = document.getElementById("meridiem").textContent
-    if (meridiem == "pm") {
+    if (meridiem == "pm" && hour != 12) {
         hour += 12
     }
     return {'hour': hour, 'minute': minute, 'second': second}
