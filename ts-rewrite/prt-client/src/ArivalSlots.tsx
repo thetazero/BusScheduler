@@ -20,9 +20,8 @@ const ArivalSlot: React.FC<BusETA> = ({stop, seconds_remaining, name}) => {
     return (
         <>
             <div className='bus-tile'>
-                <span className="time">{format_seconds(seconds_remaining)}</span>
-                <span className="bus-name">{name}</span>
-                <span className="stop-name">{stop}</span>
+                <span className="left">{format_seconds(seconds_remaining)} | {name}</span>
+                <span className="right">{stop}</span>
             </div> 
         </>
     )

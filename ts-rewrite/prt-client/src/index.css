@@ -14,10 +14,15 @@
 }
 
 /* https://codepen.io/sdthornton/pen/wBZdXq */
-div.bus-tile {
+.bus-tile {
     background: hsl(0, 0%, 18%);
     /* material design box shadow */
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     margin: 20px;
-    display: grid;
+    padding: 5px;
+    font-size: 3em;
+}
+
+.bus-tile .left {
+    float:left;
 }
