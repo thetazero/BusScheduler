@@ -21,6 +21,7 @@
     margin: 20px;
     padding: 5px;
     font-size: 3em;
+    text-align: right;
 }
 
 .bus-tile .left {

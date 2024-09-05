@@ -30,7 +30,6 @@ function App() {
                 let rem = (predicted_time.getTime() - new Date().getTime()) / 1000
                 return { stop: arival.stop_name, seconds_remaining: rem, name: arival.bus_name }
             })
-            console.log(newBusEtas)
 
             setBusEtas(newBusEtas)
         }, 1000)
