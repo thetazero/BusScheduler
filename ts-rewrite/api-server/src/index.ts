@@ -1,16 +1,20 @@
 import express, { Request, Response } from 'express';
+import cors from 'cors';
 
-import { get_prediction } from './prt';
-import { BusName } from './types';
+import { extract_nice_predictions, get_prediction } from './prt';
+import { House, getHouse, getHouseStops } from './house';
 
 const app = express();
+
+app.use(cors());
+
 const port = process.env.PORT || 3000;
 
-app.get('/', async (req: Request, res: Response) => {
-    let stop_ids = ['7097']
-    // let routes = [BusName.C61]
+app.get('/house/:house', async (req: Request, res: Response) => {
+    const house: House = getHouse(req.params.house);
+    const stop_ids = getHouseStops(house);
     let result = await get_prediction(stop_ids)
-    res.send(result);
+    res.send(extract_nice_predictions(result))
 });
 
 app.listen(port, () => {
