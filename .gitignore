@@ -1,2 +1,4 @@
 *.pyc
 .venv
+api-server/node_modules
+api-server/dist
