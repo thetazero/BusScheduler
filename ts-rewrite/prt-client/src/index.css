@@ -32,3 +32,9 @@
 .bus-tile .left {
     float:left;
 }
+
+.error {
+    font-size: 3em;
+    text-align: center;
+    color: hsl(350, 100%, 50%);
+}

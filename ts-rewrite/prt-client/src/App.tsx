@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BusArivalTime } from './types'
 import ArivalSlot from './ArivalSlots'
+import { useParams } from 'react-router-dom'
 
 export interface BusETA {
     stop: string
@@ -12,21 +13,31 @@ export interface BusETA {
 function App() {
     const [arivalTimes, setArivalTimes] = useState<BusArivalTime[]>([])
     const [busEtas, setBusEtas] = useState<BusETA[]>([])
+    const [error, setError] = useState<string | null>(null)
 
-    async function updateArivalTimes() {
-        const response = await fetch('http://localhost:3000/house/drc')
+    const { house } = useParams();
+
+    async function updateArivalTimes(house: string) {
+        const response = await fetch(`http://localhost:3000/house/${house}`)
+        if (!response.ok) {
+            console.error('Failed to fetch arival times')
+            setArivalTimes([])
+            setError('Failed to fetch arival times')
+            return
+        }
         const data = await response.json()
+        setError(null)
         setArivalTimes(data)
     }
 
     useEffect(() => {
-        updateArivalTimes()
+        updateArivalTimes(house || '')
         console.log('Updated arival times')
-    }, [])
+    }, [house])
 
     useEffect(() => {
         const interval = setInterval(() => {
-            updateArivalTimes()
+            updateArivalTimes(house || '')
         }, 10_000)
 
         return () => { clearInterval(interval) }
@@ -49,14 +60,15 @@ function App() {
 
     return (
         <>
-         {
-            busEtas.map( (arival: BusETA, i:number) => {
-                return (
-                    <ArivalSlot key={i} {...arival} />
+            {
+                busEtas.map((arival: BusETA, i: number) => {
+                    return (
+                        <ArivalSlot key={i} {...arival} />
+                    )
+                }
                 )
             }
-            )
-        }
+            {error && <div className="error">{error}</div>}
         </>
     )
 }
