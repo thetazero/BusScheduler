@@ -17,7 +17,7 @@ app.get('/house/:house',
     async (req: Request, res: Response) => {
     const house: House = getHouse(req.params.house);
     const stop_ids = getHouseStops(house);
-    let result = await get_prediction(stop_ids)
+    let result = await get_prediction(stop_ids);
     res.send(extract_nice_predictions(result))
 });
 

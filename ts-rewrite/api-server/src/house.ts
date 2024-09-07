@@ -21,7 +21,7 @@ export function getHouseStops(house: House): string[] {
         case House.Island:
             return ['7097'];
         case House.DRC:
-            return ['7097']; // TODO: Add 69/67 stops
+            return ['7097', '7647'];
         default:
             throw new Error(`Invalid house: ${house}`);
     }

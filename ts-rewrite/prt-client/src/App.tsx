@@ -6,6 +6,7 @@ export interface BusETA {
     stop: string
     seconds_remaining: number
     name: string
+    arival_time: Date
 }
 
 function App() {
@@ -25,10 +26,18 @@ function App() {
 
     useEffect(() => {
         const interval = setInterval(() => {
+            updateArivalTimes()
+        }, 10_000)
+
+        return () => { clearInterval(interval) }
+    }, [])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
             let newBusEtas: BusETA[] = arivalTimes.map((arival: BusArivalTime) => {
                 let predicted_time = new Date(arival.predicted_arival_time)
                 let rem = (predicted_time.getTime() - new Date().getTime()) / 1000
-                return { stop: arival.stop_name, seconds_remaining: rem, name: arival.bus_name }
+                return { stop: arival.stop_name, seconds_remaining: rem, name: arival.bus_name, arival_time: predicted_time }
             })
 
             setBusEtas(newBusEtas)
