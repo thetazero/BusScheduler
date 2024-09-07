@@ -8,7 +8,10 @@ const house_map: { [key: string]: House } = {
     'drc': House.DRC,
 }
 
-export function getHouse(house: string): House | null {
+export function getHouse(house: string | undefined): House | null {
+    if (!house) {
+        return null;
+    }
     house = house.toLowerCase();
     if (!(house in house_map)) {
         return null;

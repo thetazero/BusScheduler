@@ -1,11 +1,10 @@
 {
     "name": "api-gcs",
     "version": "1.0.0",
-    "main": "index.js",
     "scripts": {
         "build": "tsc",
-        "deploy": "gcloud functions deploy myFunctionName --gen2 --region=us-east1 --runtime=nodejs20 --trigger-http --allow-unauthenticated",
-        "dev": "npm run build && npx @google-cloud/functions-framework --target=myFunctionName",
+        "deploy": "gcloud functions deploy house --gen2 --region=us-east1 --runtime=nodejs20 --trigger-http --allow-unauthenticated",
+        "dev": "npm run build && npx @google-cloud/functions-framework --target=house",
         "gcp-build": "npm run build"
     },
     "author": "",
@@ -13,6 +12,8 @@
     "description": "",
     "dependencies": {
         "@google-cloud/functions-framework": "^3.4.2",
+        "dayjs": "^1.11.13",
+        "node-cache": "^5.1.2",
         "typescript": "^5.5.4"
     }
 }

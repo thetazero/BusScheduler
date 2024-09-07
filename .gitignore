@@ -1,4 +1,5 @@
 *.pyc
 .venv
-api-server/node_modules
-api-server/dist
+**/node_modules
+ts-rewrite/api-server/dist
+*.js
