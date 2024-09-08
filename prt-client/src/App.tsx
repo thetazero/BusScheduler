@@ -18,7 +18,7 @@ function App() {
     const { house } = useParams();
 
     async function updateArivalTimes(house: string) {
-        const response = await fetch(`http://localhost:3000/house/${house}`)
+        const response = await fetch(`https://us-east1-mutantsand.cloudfunctions.net/house?house=${house}`)
         if (!response.ok) {
             console.error('Failed to fetch arival times')
             setArivalTimes([])

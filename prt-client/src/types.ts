@@ -1,1 +1,1 @@
-../../api-server/src/types.ts
+../../api-gcs/src/types.ts
