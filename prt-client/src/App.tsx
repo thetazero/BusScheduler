@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BusArivalTime } from './types'
 import ArivalSlot from './ArivalSlots'
-import { useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 export interface BusETA {
     stop: string
@@ -15,14 +15,19 @@ function App() {
     const [busEtas, setBusEtas] = useState<BusETA[]>([])
     const [error, setError] = useState<string | null>(null)
 
-    const { house } = useParams();
+    const house = useLocation().pathname.split('/')[1]
 
     async function updateArivalTimes(house: string) {
+        if (!house) {
+            setArivalTimes([])
+            setError("No house provided")
+            return
+        }
         const response = await fetch(`https://us-east1-mutantsand.cloudfunctions.net/house?house=${house}`)
         if (!response.ok) {
             console.error('Failed to fetch arival times')
             setArivalTimes([])
-            setError('Failed to fetch arival times')
+            setError('Failed to fetch arival times for house: ' + house)
             return
         }
         const data = await response.json()
