@@ -36,29 +36,32 @@ function App() {
     }
 
     useEffect(() => {
-        updateArivalTimes(house || '')
-        console.log('Updated arival times')
-    }, [house])
+        console.log('Clearing arival times')
+        setArivalTimes([])
+        updateArivalTimes(house)
 
-    useEffect(() => {
         const interval = setInterval(() => {
-            updateArivalTimes(house || '')
+            updateArivalTimes(house)
         }, 10_000)
 
         return () => { clearInterval(interval) }
-    }, [])
+    }, [house])
+
+    function updateEtas(arivalTimes: BusArivalTime[]) {
+        let newBusEtas: BusETA[] = arivalTimes.map((arival: BusArivalTime) => {
+            let predicted_time = new Date(arival.predicted_arival_time)
+            let rem = (predicted_time.getTime() - new Date().getTime()) / 1000
+            return { stop: arival.stop_name, seconds_remaining: rem, name: arival.bus_name, arival_time: predicted_time }
+        })
+
+        setBusEtas(newBusEtas)
+    }
 
     useEffect(() => {
+        updateEtas(arivalTimes)
         const interval = setInterval(() => {
-            let newBusEtas: BusETA[] = arivalTimes.map((arival: BusArivalTime) => {
-                let predicted_time = new Date(arival.predicted_arival_time)
-                let rem = (predicted_time.getTime() - new Date().getTime()) / 1000
-                return { stop: arival.stop_name, seconds_remaining: rem, name: arival.bus_name, arival_time: predicted_time }
-            })
-
-            setBusEtas(newBusEtas)
+            updateEtas(arivalTimes)
         }, 1000)
-
 
         return () => { clearInterval(interval) }
     }, [arivalTimes]);
