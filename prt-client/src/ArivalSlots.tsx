@@ -3,7 +3,7 @@ import { BusETA } from './App';
 
 
 
-const ArivalSlot: React.FC<BusETA> = ({stop, seconds_remaining, name, arival_time }) => {
+const ArivalSlot: React.FC<BusETA> = ({ stop, seconds_remaining, name, arival_time }) => {
 
     function format_seconds(seconds: number): string {
         if (seconds < 0) {
@@ -24,9 +24,11 @@ const ArivalSlot: React.FC<BusETA> = ({stop, seconds_remaining, name, arival_tim
     return (
         <>
             <div className='bus-tile'>
-                <div className="left"> {format_time(arival_time)} | {format_seconds(seconds_remaining)} | {name}</div>
+                <span>
+                    {format_time(arival_time)} | {format_seconds(seconds_remaining)} | {name}
+                </span>
                 <div className="right">{stop}</div>
-            </div> 
+            </div>
         </>
     )
 }

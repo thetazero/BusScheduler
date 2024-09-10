@@ -1,18 +1,19 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1A1D29;
-  padding: 40px;
-  margin: 0px;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #1A1D29;
+    --pad-size: 40px;
+    padding: var(--pad-size);
+    margin: 0px;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* https://codepen.io/sdthornton/pen/wBZdXq */
@@ -21,20 +22,35 @@
     color: #1A1D29;
     /* material design box shadow */
     /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    margin-bottom: 40px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    margin-bottom: var(--pad-size);
     padding: 5px;
     font-size: 3em;
-    text-align: right;
+    text-align: left;
     border-radius: 3px;
 }
 
-.bus-tile .left {
-    float:left;
+.bus-tile .right {
+    float: right;
 }
 
 .error {
     font-size: 3em;
     text-align: center;
     color: hsl(350, 100%, 50%);
+}
+
+
+@media screen and (max-width: 600px) {
+    :root {
+        --pad-size: 20px;
+    }
+
+    .bus-tile {
+        font-size: 1em;
+    }
+
+    .bus-tile .right {
+        font-size: .7em;
+    }
 }
