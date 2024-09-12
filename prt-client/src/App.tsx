@@ -68,14 +68,16 @@ function App() {
 
     return (
         <>
-            {
-                busEtas.map((arival: BusETA, i: number) => {
-                    return (
-                        <ArivalSlot key={i} {...arival} />
+            <div className="bus-eta-container">
+                {
+                    busEtas.map((arival: BusETA, i: number) => {
+                        return (
+                            <ArivalSlot key={i} {...arival} />
+                        )
+                    }
                     )
                 }
-                )
-            }
+            </div>
             {error && <div className="error">{error}</div>}
         </>
     )
