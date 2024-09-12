@@ -2,6 +2,7 @@ import { HttpFunction } from '@google-cloud/functions-framework';
 
 import { getHouse, House, getHouseStops } from './house';
 import { extract_nice_predictions, get_prediction } from './prt';
+import { house_endpoint, BusError } from './types';
 
 function allow_cors(req: any, res: any) {
     res.set('Access-Control-Allow-Origin', '*');
@@ -20,10 +21,11 @@ export const house: HttpFunction = async (request, response) => {
     const house_name: any = request.query.house;
     const house: House | null = getHouse(house_name);
     if (!house) {
-        response.status(404).send('Invalid house');
+        response.status(404).send(BusError.HouseNotFound);
         return;
     }
     const stop_ids = getHouseStops(house);
     let result = await get_prediction(stop_ids);
-    response.send(extract_nice_predictions(result))
+    let response_data : house_endpoint = extract_nice_predictions(result);
+    response.send(response_data)
 }

@@ -11,3 +11,9 @@ export interface BusArivalTime {
     bus_name: BusName
     predicted_arival_time: number // Unix timestamp
 }
+
+export enum BusError {
+    HouseNotFound = "House not found"
+}
+
+export type house_endpoint = BusArivalTime[] | BusError
